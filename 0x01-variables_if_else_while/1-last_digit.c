@@ -3,7 +3,7 @@
 #include <stdlib.h>
 /**
  * main - main block
- * Description: print the last digit of the number stored in the variable n
+ * Description: print the last digit of the number stored in the variable int n
  * Return: 0
  */
 int main(void)
