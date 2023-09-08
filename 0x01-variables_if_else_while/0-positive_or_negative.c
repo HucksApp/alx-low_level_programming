@@ -3,8 +3,7 @@
 #include <stdio.h>
 /**
  * main - main block
- * Description: Get a random number and print the number
- * and if it is positive, negative, or zero
+ * Description: print whether the number stored in the variable n is positive or negative
  * Return: 0
  */
 int main(void)
