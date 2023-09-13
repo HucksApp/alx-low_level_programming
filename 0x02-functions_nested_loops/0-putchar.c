@@ -1,14 +1,17 @@
-#include "main.h"
-
+#include "holberton.h"
 /**
- * _isupper - checks if the character is uppercase
- * @c:  is the int that will use for the argument of the function
- * Return: 1 if uppercase character 0 if not
+ * main - prints the string "_putchar" from a character array.
+ * Return: 0 on success.
  */
-int _isupper(int c)
+int main(void)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (1);
-	else
-		return (0);
+	char c[] = "_putchar";
+	int i;
+
+	for (i = 0; i < 7; i++)
+	{
+		_putchar(c[i]);
+	}
+	_putchar('\n');
+	return (0);
 }
