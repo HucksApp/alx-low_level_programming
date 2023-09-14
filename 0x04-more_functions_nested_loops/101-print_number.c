@@ -1,38 +1,36 @@
 #include "main.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int _putchar(char c);
+
 /**
- * print_number - prints a number
- * @n: Input number
+ * print_number - prints numbers
+ * @n: number to be printed
+ * Return:void
  */
 
 void print_number(int n)
 {
-	long len, res, i, temp, expo;
 
-	res = n;
-	expo = len =  1;
-/*Check negatives*/
-	if (res < 0)
+	unsigned int n1 = 0;
+
+	if  (n < 0)
 	{
-		res *= -1;
+		n1 = -n;
 		_putchar('-');
 	}
 
-/**/
-	temp = res;
-	while (temp >= 10)
+	else
 	{
-		len++;
-		temp /= 10;
+		n1 = n;
 	}
 
-/*Create Exponent*/
-	for (i = 1; i < len; i++)
-		expo *= 10;
-/*Main */
-	while (expo > 1)
+	if (n1 / 10)
 	{
-		_putchar((res / expo) % 10 + '0');
-		expo /= 10;
+		print_number(n1 / 10);
 	}
-	_putchar(res % 10 + '0');
+
+	_putchar((n1 % 10) + '0');
 }
