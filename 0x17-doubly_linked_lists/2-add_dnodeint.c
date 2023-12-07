@@ -1,68 +1,38 @@
 #include "lists.h"
 
 /**
- * createNode - creates new node
- * @num: number
- * Return: pointer to the new node
-*/
-
-
-
-dlistint_t *createNode(int num)
-{
-	dlistint_t *node;
-
-	node = malloc(sizeof(dlistint_t));
-	node->n = num;
-	node->next = NULL;
-	node->prev = NULL;
-	if (!node)
-		return (NULL);
-	return (node);
-}
-
-
-
-
-
-/**
- * add_dnodeint -  appends node
- * @head: dlistint_t type head
- * @n: number
- * Return: pointer to added node
-*/
-
+ * add_dnodeint - adds a new node at the beginning
+ * of a dlistint_t list
+ *
+ * @head: head of the list
+ * @n: value of the element
+ * Return: the address of the new element
+ */
 dlistint_t *add_dnodeint(dlistint_t **head, const int n)
 {
-	dlistint_t *curr, *node;
+	dlistint_t *new;
+	dlistint_t *h;
 
-	/* head pointer is pointing to NULL i.e no head */
-	if (!head)
+	new = malloc(sizeof(dlistint_t));
+	if (new == NULL)
 		return (NULL);
 
-	/* head is pointing to NULL i.e no node in list*/
-	if (!(*head))
-	{
-		/*iadd node as first node*/
-		node = createNode(n);
-		if (!node)
-			return (NULL);
+	new->n = n;
+	new->prev = NULL;
+	h = *head;
 
-		(*head) = node;
-		return (node);
+	if (h != NULL)
+	{
+		while (h->prev != NULL)
+			h = h->prev;
 	}
 
-	/* list is not empty, add node as 1st node*/
-	curr = *head;
-	node = createNode(n);
+	new->next = h;
 
-	if (curr != NULL)
-		while(curr->prev != NULL)
-			curr = curr->prev;
-	if (!node)
-		return (NULL);
-	*head = node;
-	node->next = curr;
-	curr->prev = node;
-	return (node);
+	if (h != NULL)
+		h->prev = new;
+
+	*head = new;
+
+	return (new);
 }
