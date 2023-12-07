@@ -1,3 +1,4 @@
+#include "lists.h"
 /**
  * print_dlistint - prints the data in
  * dlistint_t type
