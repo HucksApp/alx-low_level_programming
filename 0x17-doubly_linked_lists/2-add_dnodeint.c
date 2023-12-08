@@ -1,38 +1,54 @@
 #include "lists.h"
 
 /**
- * add_dnodeint - adds a new node at the beginning
- * of a dlistint_t list
- *
- * @head: head of the list
- * @n: value of the element
- * Return: the address of the new element
+ * createNode - creates new node
+ * @num: number
+ * Return: pointer to the new node
  */
+dlistint_t *createNode(int num)
+{
+	dlistint_t *node;
+
+	node = malloc(sizeof(dlistint_t));
+	node->n = num;
+	node->next = NULL;
+	node->prev = NULL;
+	if (!node)
+		return (NULL);
+	return (node);
+}
+
+/**
+ * add_dnodeint -  appends node
+ * @head: dlistint_t type head
+ * @n: number
+ * Return: pointer to added node
+ */
+
 dlistint_t *add_dnodeint(dlistint_t **head, const int n)
 {
-	dlistint_t *new;
-	dlistint_t *h;
+	dlistint_t *curr, *node;
 
-	new = malloc(sizeof(dlistint_t));
-	if (new == NULL)
+	/*the head pointer is pointing to Null i.e no head*/
+	if (!head)
 		return (NULL);
 
-	new->n = n;
-	new->prev = NULL;
-	h = *head;
+	node = createNode(n);
+	if (!node)
+		return (NULL);
 
-	if (h != NULL)
-	{
-		while (h->prev != NULL)
-			h = h->prev;
+	curr = *head;
+	/* the head is pointing to NULL*/
+	if (!curr)
+	{ /*new node is the first and last node */
+		*head = node;
+		return (node);
 	}
+	/*head is pointing to first node i.e curr is at first node */
+	while (curr->prev != NULL)
+		curr = curr->prev;
 
-	new->next = h;
-
-	if (h != NULL)
-		h->prev = new;
-
-	*head = new;
-
-	return (new);
+	node->next = curr; /*new node is 1st node*/
+	curr->prev = node;/*curr or former first node is now second node*/
+	*head = node;/* point head to new first node */
 }
