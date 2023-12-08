@@ -51,4 +51,5 @@ dlistint_t *add_dnodeint(dlistint_t **head, const int n)
 	node->next = curr; /*new node is 1st node*/
 	curr->prev = node;/*curr or former first node is now second node*/
 	*head = node;/* point head to new first node */
+	return (node);
 }
