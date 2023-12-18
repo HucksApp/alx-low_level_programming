@@ -9,9 +9,3 @@ int printf(const char *format, ...)
     write(1,"Congratulations, you win the Jackpot !\n", 40);
     exit(EXIT_SUCCESS);
 }
-
-int main(void)
-{
-    printf("me");
-    return (0);
-}
