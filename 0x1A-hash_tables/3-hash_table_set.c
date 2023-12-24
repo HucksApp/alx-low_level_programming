@@ -21,10 +21,10 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 
 	for (iter = index; ht->array[iter]; iter++)
 	{/*check if key exits in list */
-		if (strcmp(ht->array[i]->key, key) == 0)
+		if (strcmp(ht->array[iter]->key, key) == 0)
 		{/*replace key value with new value*/
-			free(ht->array[i]->value);
-			ht->array[i]->value = strdup(value);
+			free(ht->array[iter]->value);
+			ht->array[iter]->value = strdup(value);
 			return (1);
 		}
 	}
