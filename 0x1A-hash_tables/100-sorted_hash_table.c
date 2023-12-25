@@ -90,7 +90,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	if (!ht->shead)
 	{/* no head node yet, definately no tail*/
 		new->sprev = NULL; /* mark start */
-		new->snext = NULL; /* mark start */
+		new->snext = NULL; /* mark end */
 		ht->shead =  new;
 		ht->stail = new;
 	}
