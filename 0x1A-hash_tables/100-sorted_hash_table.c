@@ -53,48 +53,48 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	unsigned long int index;
 
 
-	if(!ht || !key || !value || *key == '\0')
-		return(0);
+	if (!ht || !key || !value || *key == '\0')
+		return (0);
 
 	index = key_index((const unsigned char *)key, ht->size);
-	if(ht->shead)
+	if (ht->shead)
 	{/*the nodes head is not empty*/
 		tmp = ht->shead;
-		while(tmp)
+		while (tmp)
 		{/*check if key exists*/
-			if(strcmp(tmp->key,key) == 0)
+			if (strcmp(tmp->key, key) == 0)
 			{/* replace */
 				free(tmp->value);
 				tmp->value = strdup(value);
 				return (1);
 			}
-			tmp =tmp->snext;
+			tmp = tmp->snext;
 		}
 	}
 	/* its new*/
 	new = (shash_node_t *)malloc(sizeof(shash_node_t));
-	if(!new)
+	if (!new)
 	{
 		free(new);
 		return (0);
 	}
 	new->key = strdup(key);
 	new->value = strdup(value);
-	if(!new->key || !new->value)
+	if (!new->key || !new->value)
 	{
 		free(new);
 		return (0);
 	}
 	new->next = ht->array[index]; /*insert at top*/
 	ht->array[index] = new;
-	if(!ht->shead)
+	if (!ht->shead)
 	{/* no head node yet, definately no tail*/
 		new->sprev = NULL; /* mark start */
 		new->snext = NULL; /* mark start */
 		ht->shead =  new;
 		ht->stail = new;
 	}
-	else if(strcmp(ht->shead->key, new->key) > 0)
+	else if (strcmp(ht->shead->key, new->key) > 0)
 	{/* Ascending order: new key is smaller than old key */
 		new->sprev = NULL;
 		new->snext = ht->shead;
@@ -105,12 +105,12 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	{/* new key is bigger than the old key*/
 		/*new is new stail  or just insert new in ranked position*/
 		tmp = ht->shead;
-		while(tmp && strcmp(tmp->key, key) < 0)
+		while (tmp && strcmp(tmp->key, key) < 0)
 		{
 			prev = tmp; /*rev to prev node before last node or null*/
 			tmp = tmp->snext; /*move to insertion point*/
 		}
-		if(tmp)
+		if (tmp)
 		{ /* new is not tail, just insert*/
 			new->sprev = tmp->sprev;
 			tmp->sprev->snext  = new;
@@ -124,7 +124,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 			new->snext = NULL;
 			ht->stail = new;
 		}
-    }
+	}
 	return (1);
 }
 
