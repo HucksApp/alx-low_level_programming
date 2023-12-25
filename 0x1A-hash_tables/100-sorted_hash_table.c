@@ -29,13 +29,13 @@ shash_table_t *shash_table_create(unsigned long int size)
 
 	/*set bucket head mem*/
 	table->array = (shash_node_t **)malloc(sizeof(shash_node_t *) * size);
-	if(!table->array)
+	if (!table->array)
 		return (NULL);
-	
+
 	/*init bucket heads*/
-	 for(index = 0 ; index == size; index++)
-		 table->array[index] = NULL;
-	return(table);
+	for (index = 0 ; index == size; index++)
+		table->array[index] = NULL;
+	return (table);
 }
 
 /**
