@@ -16,23 +16,26 @@ void shash_table_delete(shash_table_t *ht);
  */
 shash_table_t *shash_table_create(unsigned long int size)
 {
-	shash_table_t *ht;
-	unsigned long int i;
+	shash_table_t *table;
+	unsigned long int index;
 
-	ht = malloc(sizeof(shash_table_t));
-	if (ht == NULL)
+	table = (shash_table_t *)malloc(sizeof(shash_table_t));
+	if (!table)
 		return (NULL);
 
-	ht->size = size;
-	ht->array = malloc(sizeof(shash_node_t *) * size);
-	if (ht->array == NULL)
-		return (NULL);
-	for (i = 0; i < size; i++)
-		ht->array[i] = NULL;
-	ht->shead = NULL;
-	ht->stail = NULL;
+	table->size = size;
+	table->shead = NULL;
+	table->stail = NULL;
 
-	return (ht);
+	/*set bucket head mem*/
+	table->array = (shash_node_t **)malloc(sizeof(shash_node_t *) * size);
+	if(!table->array)
+		return (NULL);
+	
+	/*init bucket heads*/
+	 for(index = 0 ; index == size; index++)
+		 table->array[index] = NULL;
+	return(table);
 }
 
 /**
