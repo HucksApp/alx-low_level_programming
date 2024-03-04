@@ -15,3 +15,5 @@ oclean:
 
 fclean: clean oclean
 
+re: all
+
